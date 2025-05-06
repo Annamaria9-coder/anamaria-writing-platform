@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/Annamaria9-coder/anamaria-writing-platform.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
