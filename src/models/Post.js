@@ -1,18 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'Please provide a title for this post'],
-    maxlength: [100, 'Title cannot be more than 100 characters']
+    required: [true, 'Please provide a title'],
+    trim: true
   },
   content: {
     type: String,
-    required: [true, 'Please provide content for this post']
-  },
-  excerpt: {
-    type: String,
-    maxlength: [200, 'Excerpt cannot be more than 200 characters']
+    required: [true, 'Please provide content']
   },
   isPublic: {
     type: Boolean,
@@ -26,15 +22,7 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-})
+});
 
-// Generate excerpt from content if not provided
-PostSchema.pre('save', function(next) {
-  if (!this.excerpt && this.content) {
-    this.excerpt = this.content.substring(0, 197) + '...'
-  }
-  this.updatedAt = Date.now()
-  next()
-})
-
-export default mongoose.models.Post || mongoose.model('Post', PostSchema)
+// Use mongoose.models to check if the model already exists to prevent overwriting
+export default mongoose.models.Post || mongoose.model('Post', PostSchema);
